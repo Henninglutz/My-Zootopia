@@ -15,7 +15,7 @@ for animal in animals_data:
     name = animal.get("name", "(?)")
     lifespan = animal.get("characteristics", {}).get("lifespan", "(k.A.)")
     diet = animal.get("characteristics", {}).get("diet", {})
-    location = animal.get(["locations"][0])
+    location = ", ".join(animal.get(["locations"][0]))
     animal_type = animal.get("characteristics", {}).get("type",{} )
 
     output += f"Name: {name}\n"
@@ -31,9 +31,9 @@ data_animals = Path("animals_data.json")
 template_html = Path("animals_template.html")
 final_output = Path("animals.html")
 
-data = json.load(data_animals.read_text(encoding = "utf-8"))
+#data = json.load(data_animals.read_text(encoding = "utf-8"))
 
 new_template_for_replace = template_html.read_text(encoding="utf-8")
 
-final_html = new_template_for_replace.replace("__REPLACE_ANIMALS_INFO__", output.replace())
+final_html = new_template_for_replace.replace("__REPLACE_ANIMALS_INFO__", output)
 final_output.write_text(final_html, encoding = "utf-8")
