@@ -1,18 +1,39 @@
 import json
+import html
+from pathlib import Path
 
 def load_data(file_path):
   """ Loads a JSON file """
-  with open(file_path, "r") as handle:
-    return json.load(handle)
+  with open(file_path, "r") as fileobj:
+    return json.load(fileobj)
 
 animals_data = load_data('animals_data.json')
-print(animals_data)
+#print(animals_data)
 
+output = " "
 for animal in animals_data:
     name = animal.get("name", "(?)")
-#    lifespan = animal.get("characteristics", {}).get("lifespan", "(k.A.)")
+    lifespan = animal.get("characteristics", {}).get("lifespan", "(k.A.)")
     diet = animal.get("characteristics", {}).get("diet", {})
     location = animal.get(["locations"][0])
     animal_type = animal.get("characteristics", {}).get("type",{} )
 
-    print(f"Name: {name}\nDiet: {diet}\nLocation: {location}\nType: {animal_type}\n")
+    output += f"Name: {name}\n"
+    output += f"Diet: {diet}\n"
+    output += f"Location: {location}\n"
+    output += f"Type: {animal_type}\n"
+    output += "\n"
+#    print(f"Name: {name}\nDiet: {diet}\nLocation: {location}\nType: {animal_type}\n")
+#print(output)
+
+
+data_animals = Path("animals_data.json")
+template_html = Path("animals_template.html")
+final_output = Path("animals.html")
+
+data = json.load(data_animals.read_text(encoding = "utf-8"))
+
+new_template_for_replace = template_html.read_text(encoding="utf-8")
+
+final_html = new_template_for_replace.replace("__REPLACE_ANIMALS_INFO__", output.replace())
+final_output.write_text(final_html, encoding = "utf-8")
