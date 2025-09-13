@@ -19,10 +19,10 @@ for animal in animals_data:
     animal_type = animal.get("characteristics", {}).get("type",{} )
 
     output += '<li class = "cards__item">'
-    output += f"Name: {name}<br/>\n"
-    output += f"Diet: {diet}<br/>\n"
-    output += f"Location: {location}<br/>\n"
-    output += f"Type: {animal_type}<br/>\n"
+    output += f"<strong>Name</strong>: {name}<br/>\n"
+    output += f"<strong>Diet:</strong> {diet}<br/>\n"
+    output += f"<strong>Location:</strong> {location}<br/>\n"
+    output += f"<strong>Type:</strong> {animal_type}<br/>\n"
     output += "\n"
     output += '</li>'
 #    print(f"Name: {name}\nDiet: {diet}\nLocation: {location}\nType: {animal_type}\n")
