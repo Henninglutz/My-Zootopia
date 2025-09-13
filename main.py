@@ -8,16 +8,10 @@ def load_data(file_path):
     return json.load(fileobj)
 
 animals_data = load_data('animals_data.json')
-#print(animals_data)
 
-output = " "
-for animal in animals_data:
-    name = animal.get("name", "(?)")
-    lifespan = animal.get("characteristics", {}).get("lifespan", "(k.A.)")
-    diet = animal.get("characteristics", {}).get("diet", {})
-    location = ", ".join(animal.get(["locations"][0]))
-    animal_type = animal.get("characteristics", {}).get("type",{} )
 
+def serialize_animal(name, diet, location, animal_type):
+    output = " "
     output += '<li class = "cards__item">'
     output += f"<strong>Name</strong>: {name}<br/>\n"
     output += f"<strong>Diet:</strong> {diet}<br/>\n"
@@ -25,9 +19,20 @@ for animal in animals_data:
     output += f"<strong>Type:</strong> {animal_type}<br/>\n"
     output += "\n"
     output += '</li>'
-#    print(f"Name: {name}\nDiet: {diet}\nLocation: {location}\nType: {animal_type}\n")
-#print(output)
+    return output
 
+
+output = " "
+for animal in animals_data:
+#    output = serialize_animal(name, diet, location, animal_type)
+    name = animal.get("name", "(?)")
+    lifespan = animal.get("characteristics", {}).get("lifespan", "(k.A.)")
+    diet = animal.get("characteristics", {}).get("diet", {})
+    location = ", ".join(animal.get(["locations"][0]))
+    animal_type = animal.get("characteristics", {}).get("type",{} )
+
+    output += serialize_animal(name, diet, location, animal_type)
+#    output += serialize_animal(name, diet, location, animal_type)
 
 data_animals = Path("animals_data.json")
 template_html = Path("animals_template.html")
