@@ -18,11 +18,13 @@ for animal in animals_data:
     location = ", ".join(animal.get(["locations"][0]))
     animal_type = animal.get("characteristics", {}).get("type",{} )
 
-    output += f"Name: {name}\n"
-    output += f"Diet: {diet}\n"
-    output += f"Location: {location}\n"
-    output += f"Type: {animal_type}\n"
+    output += '<li class = "cards__item">'
+    output += f"Name: {name}<br/>\n"
+    output += f"Diet: {diet}<br/>\n"
+    output += f"Location: {location}<br/>\n"
+    output += f"Type: {animal_type}<br/>\n"
     output += "\n"
+    output += '</li>'
 #    print(f"Name: {name}\nDiet: {diet}\nLocation: {location}\nType: {animal_type}\n")
 #print(output)
 
